@@ -4,9 +4,9 @@
   "nodes": [
     {
       "id": 1,
-      "type": "VHS_LoadImagesPath",
+      "type": "VHS_LoadImages",
       "pos": [50, 100],
-      "size": [340, 200],
+      "size": [340, 220],
       "flags": {},
       "order": 0,
       "mode": 0,
@@ -18,9 +18,9 @@
         {"name": "MASK", "type": "MASK", "links": null, "slot_index": 1},
         {"name": "frame_count", "type": "INT", "links": null, "slot_index": 2}
       ],
-      "title": "1. Fotos de referência (o rosto a usar)",
-      "properties": {"Node name for S&R": "VHS_LoadImagesPath"},
-      "widgets_values": ["PASTE_REFERENCE_FACE_FOLDER_PATH_HERE", 0, 0, 1]
+      "title": "1. Fotos de referência (clique em upload e envie o rosto)",
+      "properties": {"Node name for S&R": "VHS_LoadImages"},
+      "widgets_values": ["", 0, 0, 1]
     },
     {
       "id": 2,
@@ -43,9 +43,9 @@
     },
     {
       "id": 3,
-      "type": "VHS_LoadImagesPath",
+      "type": "VHS_LoadImages",
       "pos": [50, 400],
-      "size": [340, 200],
+      "size": [340, 220],
       "flags": {},
       "order": 2,
       "mode": 0,
@@ -57,9 +57,9 @@
         {"name": "MASK", "type": "MASK", "links": null, "slot_index": 1},
         {"name": "frame_count", "type": "INT", "links": null, "slot_index": 2}
       ],
-      "title": "3. Fotos-alvo (onde o rosto será trocado, em lote)",
-      "properties": {"Node name for S&R": "VHS_LoadImagesPath"},
-      "widgets_values": ["PASTE_TARGET_PHOTOS_FOLDER_PATH_HERE", 0, 0, 1]
+      "title": "3. Fotos-alvo (clique em upload e envie o lote de fotos)",
+      "properties": {"Node name for S&R": "VHS_LoadImages"},
+      "widgets_values": ["", 0, 0, 1]
     },
     {
       "id": 4,

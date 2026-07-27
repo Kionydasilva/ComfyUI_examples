@@ -26,14 +26,14 @@ Depois de instalar o ReActor, siga as instruções do próprio repositório dele
 
 Reinicie o ComfyUI depois de instalar os custom nodes e os modelos.
 
-## Como usar
+## Como usar (upload direto pelo navegador, sem mexer em pasta/servidor)
 
-1. Coloque as fotos do rosto de referência em uma pasta (pode ser uma subpasta dentro de `ComfyUI/input/`, por exemplo `ComfyUI/input/rosto_referencia`).
-2. Coloque todas as fotos-alvo (as que vão receber o rosto) em outra pasta, ex: `ComfyUI/input/fotos_para_trocar`.
-3. Carregue `face_swap_batch_workflow.json` no ComfyUI.
-4. No node **1. Fotos de referência**, edite o campo `directory` com o caminho completo da pasta do passo 1.
-5. No node **3. Fotos-alvo**, edite o campo `directory` com o caminho completo da pasta do passo 2.
-6. Clique em **Queue Prompt**. O ComfyUI vai processar todas as fotos-alvo de uma vez e salvar os resultados em `ComfyUI/output/face_swap/`.
+1. Carregue `face_swap_batch_workflow.json` no ComfyUI (Load, ou arraste o arquivo para a janela).
+2. No node **1. Fotos de referência**, clique no botão de upload do próprio node e selecione a(s) foto(s) do rosto que você quer usar (dá pra escolher mais de uma foto de uma vez, ângulos/iluminação diferentes deixam o resultado mais fiel).
+3. No node **3. Fotos-alvo**, clique no botão de upload e selecione todas as fotos onde o rosto deve ser trocado — pode selecionar o lote inteiro de uma vez.
+4. Clique em **Queue Prompt**. O ComfyUI processa todas as fotos-alvo em sequência e salva os resultados em `ComfyUI/output/face_swap/`.
+
+Você não precisa digitar caminho de pasta nem enviar nada por fora do workflow — o upload é feito pelo próprio node, direto do navegador, e os arquivos ficam guardados dentro do `ComfyUI/input/` da instância que está rodando o workflow (seja local ou num pod na nuvem).
 
 ## Ajustes finos (opcional)
 
