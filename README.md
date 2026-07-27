@@ -22,6 +22,8 @@ Here are some more advanced examples:
 
 [Upscale Models (ESRGAN, etc..)](upscale_models)
 
+[Batch Face Swap (ReActor)](face_swap)
+
 [Area Composition](area_composition)
 
 [Noisy Latent Composition](noisy_latent_composition)
