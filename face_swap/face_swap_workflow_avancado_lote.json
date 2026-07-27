@@ -86,7 +86,7 @@
         true,
         "inswapper_128.onnx",
         "retinaface_resnet50",
-        "GFPGANv1.4",
+        "GFPGANv1.4.pth",
         1,
         0.5,
         "no",

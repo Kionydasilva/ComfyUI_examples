@@ -58,7 +58,7 @@
       ],
       "title": "ReActor 1",
       "properties": {"Node name for S&R": "ReActorFaceSwap"},
-      "widgets_values": [true, "inswapper_128.onnx", "retinaface_resnet50", "GFPGANv1.4", 1, 0.5, "no", "no", "0", "0", 1]
+      "widgets_values": [true, "inswapper_128.onnx", "retinaface_resnet50", "GFPGANv1.4.pth", 1, 0.5, "no", "no", "0", "0", 1]
     },
     {
       "id": 4,
@@ -115,7 +115,7 @@
       ],
       "title": "ReActor 2",
       "properties": {"Node name for S&R": "ReActorFaceSwap"},
-      "widgets_values": [true, "inswapper_128.onnx", "retinaface_resnet50", "GFPGANv1.4", 1, 0.5, "no", "no", "0", "0", 1]
+      "widgets_values": [true, "inswapper_128.onnx", "retinaface_resnet50", "GFPGANv1.4.pth", 1, 0.5, "no", "no", "0", "0", 1]
     },
     {
       "id": 7,
@@ -172,7 +172,7 @@
       ],
       "title": "ReActor 3",
       "properties": {"Node name for S&R": "ReActorFaceSwap"},
-      "widgets_values": [true, "inswapper_128.onnx", "retinaface_resnet50", "GFPGANv1.4", 1, 0.5, "no", "no", "0", "0", 1]
+      "widgets_values": [true, "inswapper_128.onnx", "retinaface_resnet50", "GFPGANv1.4.pth", 1, 0.5, "no", "no", "0", "0", 1]
     },
     {
       "id": 10,
@@ -229,7 +229,7 @@
       ],
       "title": "ReActor 4",
       "properties": {"Node name for S&R": "ReActorFaceSwap"},
-      "widgets_values": [true, "inswapper_128.onnx", "retinaface_resnet50", "GFPGANv1.4", 1, 0.5, "no", "no", "0", "0", 1]
+      "widgets_values": [true, "inswapper_128.onnx", "retinaface_resnet50", "GFPGANv1.4.pth", 1, 0.5, "no", "no", "0", "0", 1]
     },
     {
       "id": 13,

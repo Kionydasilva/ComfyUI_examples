@@ -36,7 +36,7 @@ Depois de instalar o ReActor, siga as instruções do próprio repositório dele
 
 - Modelo de swap: `inswapper_128.onnx`
 - Detector de rosto: `retinaface_resnet50` (já vem com as dependências do ReActor)
-- Restauração de rosto (deixa a pele/iluminação mais natural depois do swap): `GFPGANv1.4.pth` (ou troque por `codeformer.pth` no node se preferir)
+- Restauração de rosto (deixa a pele/iluminação mais natural depois do swap): `GFPGANv1.4.pth` (ou troque por `codeformer-v0.1.0.pth` no node se preferir)
 
 Reinicie o ComfyUI depois de instalar os custom nodes e os modelos.
 
