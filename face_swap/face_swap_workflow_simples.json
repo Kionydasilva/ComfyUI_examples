@@ -1,0 +1,276 @@
+{
+  "last_node_id": 13,
+  "last_link_id": 12,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "LoadImage",
+      "pos": [40, 60],
+      "size": [300, 320],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {"name": "IMAGE", "type": "IMAGE", "links": [1, 4, 7, 10], "slot_index": 0},
+        {"name": "MASK", "type": "MASK", "links": null, "slot_index": 1}
+      ],
+      "title": "0. Rosto de referência - clique em 'choose file to upload'",
+      "properties": {"Node name for S&R": "LoadImage"},
+      "widgets_values": ["example.png"]
+    },
+
+    {
+      "id": 2,
+      "type": "LoadImage",
+      "pos": [400, 60],
+      "size": [300, 320],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {"name": "IMAGE", "type": "IMAGE", "links": [2], "slot_index": 0},
+        {"name": "MASK", "type": "MASK", "links": null, "slot_index": 1}
+      ],
+      "title": "Foto-alvo 1 - clique em 'choose file to upload'",
+      "properties": {"Node name for S&R": "LoadImage"},
+      "widgets_values": ["example.png"]
+    },
+    {
+      "id": 3,
+      "type": "ReActorFaceSwap",
+      "pos": [760, 60],
+      "size": [320, 400],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {"name": "input_image", "type": "IMAGE", "link": 2},
+        {"name": "source_image", "type": "IMAGE", "link": 1},
+        {"name": "face_model", "type": "FACE_MODEL", "link": null},
+        {"name": "face_boost", "type": "FACE_BOOST", "link": null}
+      ],
+      "outputs": [
+        {"name": "SWAPPED_IMAGE", "type": "IMAGE", "links": [3], "slot_index": 0},
+        {"name": "FACE_MODEL", "type": "FACE_MODEL", "links": null, "slot_index": 1},
+        {"name": "ORIGINAL_IMAGE", "type": "IMAGE", "links": null, "slot_index": 2}
+      ],
+      "title": "ReActor 1",
+      "properties": {"Node name for S&R": "ReActorFaceSwap"},
+      "widgets_values": [true, "inswapper_128.onnx", "retinaface_resnet50", "GFPGANv1.4", 1, 0.5, "no", "no", "0", "0", 1]
+    },
+    {
+      "id": 4,
+      "type": "SaveImage",
+      "pos": [1120, 60],
+      "size": [260, 300],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {"name": "images", "type": "IMAGE", "link": 3}
+      ],
+      "outputs": [],
+      "title": "Resultado 1",
+      "properties": {"Node name for S&R": "SaveImage"},
+      "widgets_values": ["face_swap/resultado_1"]
+    },
+
+    {
+      "id": 5,
+      "type": "LoadImage",
+      "pos": [400, 420],
+      "size": [300, 320],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {"name": "IMAGE", "type": "IMAGE", "links": [5], "slot_index": 0},
+        {"name": "MASK", "type": "MASK", "links": null, "slot_index": 1}
+      ],
+      "title": "Foto-alvo 2 - clique em 'choose file to upload'",
+      "properties": {"Node name for S&R": "LoadImage"},
+      "widgets_values": ["example.png"]
+    },
+    {
+      "id": 6,
+      "type": "ReActorFaceSwap",
+      "pos": [760, 420],
+      "size": [320, 400],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {"name": "input_image", "type": "IMAGE", "link": 5},
+        {"name": "source_image", "type": "IMAGE", "link": 4},
+        {"name": "face_model", "type": "FACE_MODEL", "link": null},
+        {"name": "face_boost", "type": "FACE_BOOST", "link": null}
+      ],
+      "outputs": [
+        {"name": "SWAPPED_IMAGE", "type": "IMAGE", "links": [6], "slot_index": 0},
+        {"name": "FACE_MODEL", "type": "FACE_MODEL", "links": null, "slot_index": 1},
+        {"name": "ORIGINAL_IMAGE", "type": "IMAGE", "links": null, "slot_index": 2}
+      ],
+      "title": "ReActor 2",
+      "properties": {"Node name for S&R": "ReActorFaceSwap"},
+      "widgets_values": [true, "inswapper_128.onnx", "retinaface_resnet50", "GFPGANv1.4", 1, 0.5, "no", "no", "0", "0", 1]
+    },
+    {
+      "id": 7,
+      "type": "SaveImage",
+      "pos": [1120, 420],
+      "size": [260, 300],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {"name": "images", "type": "IMAGE", "link": 6}
+      ],
+      "outputs": [],
+      "title": "Resultado 2",
+      "properties": {"Node name for S&R": "SaveImage"},
+      "widgets_values": ["face_swap/resultado_2"]
+    },
+
+    {
+      "id": 8,
+      "type": "LoadImage",
+      "pos": [400, 780],
+      "size": [300, 320],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {"name": "IMAGE", "type": "IMAGE", "links": [8], "slot_index": 0},
+        {"name": "MASK", "type": "MASK", "links": null, "slot_index": 1}
+      ],
+      "title": "Foto-alvo 3 - clique em 'choose file to upload'",
+      "properties": {"Node name for S&R": "LoadImage"},
+      "widgets_values": ["example.png"]
+    },
+    {
+      "id": 9,
+      "type": "ReActorFaceSwap",
+      "pos": [760, 780],
+      "size": [320, 400],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {"name": "input_image", "type": "IMAGE", "link": 8},
+        {"name": "source_image", "type": "IMAGE", "link": 7},
+        {"name": "face_model", "type": "FACE_MODEL", "link": null},
+        {"name": "face_boost", "type": "FACE_BOOST", "link": null}
+      ],
+      "outputs": [
+        {"name": "SWAPPED_IMAGE", "type": "IMAGE", "links": [9], "slot_index": 0},
+        {"name": "FACE_MODEL", "type": "FACE_MODEL", "links": null, "slot_index": 1},
+        {"name": "ORIGINAL_IMAGE", "type": "IMAGE", "links": null, "slot_index": 2}
+      ],
+      "title": "ReActor 3",
+      "properties": {"Node name for S&R": "ReActorFaceSwap"},
+      "widgets_values": [true, "inswapper_128.onnx", "retinaface_resnet50", "GFPGANv1.4", 1, 0.5, "no", "no", "0", "0", 1]
+    },
+    {
+      "id": 10,
+      "type": "SaveImage",
+      "pos": [1120, 780],
+      "size": [260, 300],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {"name": "images", "type": "IMAGE", "link": 9}
+      ],
+      "outputs": [],
+      "title": "Resultado 3",
+      "properties": {"Node name for S&R": "SaveImage"},
+      "widgets_values": ["face_swap/resultado_3"]
+    },
+
+    {
+      "id": 11,
+      "type": "LoadImage",
+      "pos": [400, 1140],
+      "size": [300, 320],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {"name": "IMAGE", "type": "IMAGE", "links": [11], "slot_index": 0},
+        {"name": "MASK", "type": "MASK", "links": null, "slot_index": 1}
+      ],
+      "title": "Foto-alvo 4 - clique em 'choose file to upload'",
+      "properties": {"Node name for S&R": "LoadImage"},
+      "widgets_values": ["example.png"]
+    },
+    {
+      "id": 12,
+      "type": "ReActorFaceSwap",
+      "pos": [760, 1140],
+      "size": [320, 400],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {"name": "input_image", "type": "IMAGE", "link": 11},
+        {"name": "source_image", "type": "IMAGE", "link": 10},
+        {"name": "face_model", "type": "FACE_MODEL", "link": null},
+        {"name": "face_boost", "type": "FACE_BOOST", "link": null}
+      ],
+      "outputs": [
+        {"name": "SWAPPED_IMAGE", "type": "IMAGE", "links": [12], "slot_index": 0},
+        {"name": "FACE_MODEL", "type": "FACE_MODEL", "links": null, "slot_index": 1},
+        {"name": "ORIGINAL_IMAGE", "type": "IMAGE", "links": null, "slot_index": 2}
+      ],
+      "title": "ReActor 4",
+      "properties": {"Node name for S&R": "ReActorFaceSwap"},
+      "widgets_values": [true, "inswapper_128.onnx", "retinaface_resnet50", "GFPGANv1.4", 1, 0.5, "no", "no", "0", "0", 1]
+    },
+    {
+      "id": 13,
+      "type": "SaveImage",
+      "pos": [1120, 1140],
+      "size": [260, 300],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {"name": "images", "type": "IMAGE", "link": 12}
+      ],
+      "outputs": [],
+      "title": "Resultado 4",
+      "properties": {"Node name for S&R": "SaveImage"},
+      "widgets_values": ["face_swap/resultado_4"]
+    }
+  ],
+  "links": [
+    [1, 1, 0, 3, 1, "IMAGE"],
+    [2, 2, 0, 3, 0, "IMAGE"],
+    [3, 3, 0, 4, 0, "IMAGE"],
+    [4, 1, 0, 6, 1, "IMAGE"],
+    [5, 5, 0, 6, 0, "IMAGE"],
+    [6, 6, 0, 7, 0, "IMAGE"],
+    [7, 1, 0, 9, 1, "IMAGE"],
+    [8, 8, 0, 9, 0, "IMAGE"],
+    [9, 9, 0, 10, 0, "IMAGE"],
+    [10, 1, 0, 12, 1, "IMAGE"],
+    [11, 11, 0, 12, 0, "IMAGE"],
+    [12, 12, 0, 13, 0, "IMAGE"]
+  ],
+  "groups": [
+    {
+      "title": "Rosto de referência (1 upload, usado nos 4 abaixo)",
+      "bounding": [20, 20, 340, 380],
+      "color": "#3f789e",
+      "font_size": 20
+    }
+  ],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}

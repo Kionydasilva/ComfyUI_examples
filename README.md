@@ -22,7 +22,7 @@ Here are some more advanced examples:
 
 [Upscale Models (ESRGAN, etc..)](upscale_models)
 
-[Batch Face Swap (ReActor)](face_swap)
+[Face Swap (ReActor)](face_swap)
 
 [Area Composition](area_composition)
 
