@@ -1,0 +1,81 @@
+#!/bin/bash
+# Run dev-browser against a Chromium that this container can actually reach.
+#
+# `dev-browser install` cannot work here: it downloads Chrome for Testing from
+# cdn.playwright.dev, which the environment's network allowlist rejects with 403.
+# Instead we reuse the Chromium that ships with the image and attach over CDP.
+#
+# Usage: same as `dev-browser`, minus the --connect flag.
+#   dev-browser-here <<'EOF'
+#     const page = await browser.getPage("main");
+#     await page.goto("https://github.com");
+#   EOF
+
+set -euo pipefail
+
+CDP_PORT="${DEV_BROWSER_CDP_PORT:-9222}"
+PROFILE_DIR="${DEV_BROWSER_PROFILE_DIR:-$HOME/.dev-browser/managed-profile}"
+LOG_FILE="$HOME/.dev-browser/chromium.log"
+
+find_chromium() {
+  local candidate
+  for candidate in \
+    "${PLAYWRIGHT_BROWSERS_PATH:-/opt/pw-browsers}"/chromium-*/chrome-linux/chrome \
+    "${PLAYWRIGHT_BROWSERS_PATH:-/opt/pw-browsers}"/chromium/chrome-linux/chrome; do
+    [ -x "$candidate" ] && { echo "$candidate"; return 0; }
+  done
+  for candidate in chromium chromium-browser google-chrome google-chrome-stable; do
+    command -v "$candidate" >/dev/null 2>&1 && { command -v "$candidate"; return 0; }
+  done
+  return 1
+}
+
+cdp_is_up() {
+  curl -sf --noproxy '*' --max-time 2 "http://127.0.0.1:$CDP_PORT/json/version" >/dev/null 2>&1
+}
+
+start_chromium() {
+  local chrome_bin
+  chrome_bin="$(find_chromium)" || {
+    echo "dev-browser-here: no Chromium found. Looked under ${PLAYWRIGHT_BROWSERS_PATH:-/opt/pw-browsers} and on PATH." >&2
+    exit 1
+  }
+
+  local -a flags=(
+    --headless=new
+    --no-sandbox
+    --disable-gpu
+    --disable-dev-shm-usage
+    --remote-debugging-port="$CDP_PORT"
+    --user-data-dir="$PROFILE_DIR"
+  )
+
+  # The agent proxy terminates TLS with its own CA. Chromium reads trust roots
+  # from an NSS database, not from a PEM path, and certutil is not in this image,
+  # so the CA cannot be installed the normal way. Skipping cert validation is
+  # confined to this throwaway sandbox browser talking to that one proxy.
+  local proxy="${HTTPS_PROXY:-${https_proxy:-}}"
+  if [ -n "$proxy" ]; then
+    flags+=(--proxy-server="$proxy" --ignore-certificate-errors)
+  fi
+
+  mkdir -p "$PROFILE_DIR" "$(dirname "$LOG_FILE")"
+  nohup "$chrome_bin" "${flags[@]}" about:blank >"$LOG_FILE" 2>&1 &
+
+  for _ in $(seq 1 30); do
+    cdp_is_up && return 0
+    sleep 0.5
+  done
+
+  echo "dev-browser-here: Chromium did not open a CDP endpoint on port $CDP_PORT. Log: $LOG_FILE" >&2
+  exit 1
+}
+
+command -v dev-browser >/dev/null 2>&1 || {
+  echo "dev-browser: not installed. Run .claude/hooks/session-start.sh, or: npm install -g dev-browser" >&2
+  exit 1
+}
+
+cdp_is_up || start_chromium
+
+exec dev-browser --connect "http://127.0.0.1:$CDP_PORT" "$@"
