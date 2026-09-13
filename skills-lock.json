@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "notebooklm": {
+      "source": "teng-lin/notebooklm-py",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "acc53f80d66bc34db405809871e1bb0663ac0448f98814d7404f7ab4329ea6d5"
+    }
+  }
+}
