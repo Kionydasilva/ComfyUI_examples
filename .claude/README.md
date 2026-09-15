@@ -34,3 +34,35 @@ land in `~/.dev-browser/tmp/`.
 
 The hook is a no-op outside the remote container — local machines keep their own
 setup.
+
+## Video
+
+The `watch` skill lives in `.agents/skills/watch` (installed via `npx skills
+add bradautomates/claude-video`, pinned in `skills-lock.json`), with the usual
+symlink from `.claude/skills/watch`. It hands Claude frames plus a transcript
+for a video URL or a local file.
+
+Unlike `dev-browser`, this one is **not** bootstrapped on session start. In the
+remote container its two headline paths are closed by the network policy:
+
+- `yt-dlp` against YouTube (and every other remote host it supports) gets a
+  403 on CONNECT from the agent proxy, so URLs do not resolve.
+- `api.groq.com` and `api.openai.com` are unreachable too, so the Whisper
+  fallback cannot run and videos without native captions come back frames-only.
+
+What does work remotely is a **local video file, frames only**. Its two
+dependencies are absent from the image, so install them first:
+
+```bash
+apt-get update && apt-get install -y ffmpeg
+pip install yt-dlp                     # still required: watch.py probes for it
+python3 .agents/skills/watch/scripts/watch.py clip.mp4 --no-whisper
+```
+
+That costs ~90s, which is why it is not in `.claude/hooks/session-start.sh` —
+paying it on every session start to service the one path that still works is a
+bad trade. The skill's own `setup.py --json` preflight detects the missing
+binaries and prints the same commands.
+
+On a local machine the skill works as documented upstream: URLs, captions, and
+the Whisper fallback all reachable.
