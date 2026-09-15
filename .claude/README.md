@@ -50,14 +50,17 @@ remote container its two headline paths are closed by the network policy:
 - `api.groq.com` and `api.openai.com` are unreachable too, so the Whisper
   fallback cannot run and videos without native captions come back frames-only.
 
-What does work remotely is a **local video file, frames only**. Its two
-dependencies are absent from the image, so install them first:
+What does work remotely is a **local video file, frames only**. `ffmpeg` is
+absent from the image, so install it first:
 
 ```bash
 apt-get update && apt-get install -y ffmpeg
-pip install yt-dlp                     # still required: watch.py probes for it
 python3 .agents/skills/watch/scripts/watch.py clip.mp4 --no-whisper
 ```
+
+`watch.py` itself does not need `yt-dlp` on a local path — only `setup.py`'s
+preflight insists on it, and that check is advisory. `pip install yt-dlp`
+silences it.
 
 That costs ~90s, which is why it is not in `.claude/hooks/session-start.sh` —
 paying it on every session start to service the one path that still works is a
